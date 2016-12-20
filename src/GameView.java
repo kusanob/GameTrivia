@@ -7,14 +7,58 @@ import javax.swing.*;
 
 public class GameView extends JLabel implements Observer{
 	private GameModel gm;
-	
-	
+		
 	public GameView(GameModel ourGame){
 		gm = ourGame;
 		this.setText(gm.getQuestion());
 	}
 	
-//	public JPanel createGamePanel(){
+	public static JPanel createGamePanel(JFrame jf){
+		GameModel gm = new GameModel();
+		
+		GameView gv = new GameView(gm);
+		gm.addObserver(gv);
+		
+		JPanel jp = new JPanel();
+		jp.setLayout(new GridLayout(0,1));
+		
+		JButton jb = new JButton("Enter");
+		
+		JTextField jt = new JTextField(10);
+		
+		GameListener gl = new GameListener(gm, jt, jf);
+		jb.addActionListener(gl);
+		jf.getRootPane().setDefaultButton(jb);
+		jp.add(gv); 
+		jp.add(jt);
+		jp.add(jb);
+		return jp;
+	}
+	
+	public static JPanel createWinPanel(){
+		JPanel jp = new JPanel();
+		jp.setLayout(new GridLayout(0,1));
+		JLabel jl = new JLabel("You won!");
+		jp.add(jl);
+		return jp;
+	}
+	
+	
+	public static void createandshowgui(){
+		JFrame jf = new JFrame("Game one!");
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jf.getContentPane().setLayout(new GridLayout(0,1));
+		jf.setSize(300, 125);
+
+		JPanel startMenu = new JPanel();
+		startMenu.setLayout(new GridLayout(0, 2));
+		
+		JButton startButton = new JButton("Start");
+		
+		GameStartListener gsl = new GameStartListener(jf);
+		
+		startMenu.add(startButton);
+		startButton.addActionListener(gsl);
 //		GameModel gm = new GameModel();
 //		
 //		GameView gv = new GameView(gm);
@@ -29,48 +73,11 @@ public class GameView extends JLabel implements Observer{
 //		
 //		GameListener gl = new GameListener(gm, jt, jf, gv);
 //		jb.addActionListener(gl);
-//		jp.getRootPane().setDefaultButton(jb);
+//		jf.getRootPane().setDefaultButton(jb);
 //		jp.add(gv); 
 //		jp.add(jt);
 //		jp.add(jb);
-//		return jp;
-//	}
-	
-	public JPanel createWinPanel(){
-		JPanel jp = new JPanel();
-		jp.setLayout(new GridLayout(0,1));
-		JLabel jl = new JLabel("You won!");
-		jp.add(jl);
-		return jp;
-	}
-	
-	
-	public static void createandshowgui(){
-		JFrame jf = new JFrame("Game one!");
-		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jf.getContentPane().setLayout(new GridLayout(0,1));
-		jf.setSize(300, 125);
-		
-		
-		GameModel gm = new GameModel();
-		
-		GameView gv = new GameView(gm);
-		gm.addObserver(gv);
-		
-		JPanel jp = new JPanel();
-		jp.setLayout(new GridLayout(0,1));
-		
-		JButton jb = new JButton("Enter");
-		
-		JTextField jt = new JTextField(10);
-		
-		GameListener gl = new GameListener(gm, jt, jf, gv);
-		jb.addActionListener(gl);
-		jf.getRootPane().setDefaultButton(jb);
-		jp.add(gv); 
-		jp.add(jt);
-		jp.add(jb);
-		jf.add(jp);
+		jf.add(startMenu);
 		jf.setVisible(true);
 	}
 	

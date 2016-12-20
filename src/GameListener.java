@@ -10,13 +10,11 @@ public class GameListener implements ActionListener{
 	private GameModel gm;
 	private JTextField ot;
 	private JFrame jf;
-	private GameView gv;
 	
-	public GameListener(GameModel ourGame, JTextField ourText, JFrame oj, GameView ogv){
+	public GameListener(GameModel ourGame, JTextField ourText, JFrame oj){
 		gm = ourGame;
 		ot = ourText;
 		jf = oj;
-		gv = ogv;
 		
 	}
 	
@@ -24,7 +22,7 @@ public class GameListener implements ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		if(gm.answerQuestion(ot.getText())){
 			if(gm.isFinished(ot.getText())){
-				JPanel a = gv.createWinPanel();
+				JPanel a = GameView.createWinPanel();
 				jf.setContentPane(a);
 				jf.revalidate();
 				return;
