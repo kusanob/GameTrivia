@@ -37,8 +37,9 @@ public class GameView extends JLabel implements Observer{
 	
 	public static JPanel createWinPanel(){
 		JPanel jp = new JPanel();
-		jp.setLayout(new GridLayout(0,1));
+		jp.setLayout(new GridLayout(2,1));
 		JLabel jl = new JLabel("You won!");
+		jl.setHorizontalAlignment(CENTER);
 		jp.add(jl);
 		return jp;
 	}
@@ -51,7 +52,7 @@ public class GameView extends JLabel implements Observer{
 		jf.setSize(300, 125);
 
 		JPanel startMenu = new JPanel();
-		startMenu.setLayout(new GridLayout(0, 2));
+		startMenu.setLayout(new GridLayout(2, 1));
 		
 		JButton startButton = new JButton("Start");
 		
@@ -59,36 +60,16 @@ public class GameView extends JLabel implements Observer{
 		
 		startMenu.add(startButton);
 		startButton.addActionListener(gsl);
-//		GameModel gm = new GameModel();
-//		
-//		GameView gv = new GameView(gm);
-//		gm.addObserver(gv);
-//		
-//		JPanel jp = new JPanel();
-//		jp.setLayout(new GridLayout(0,1));
-//		
-//		JButton jb = new JButton("Enter");
-//		
-//		JTextField jt = new JTextField(10);
-//		
-//		GameListener gl = new GameListener(gm, jt, jf, gv);
-//		jb.addActionListener(gl);
-//		jf.getRootPane().setDefaultButton(jb);
-//		jp.add(gv); 
-//		jp.add(jt);
-//		jp.add(jb);
+		
 		jf.add(startMenu);
 		jf.setVisible(true);
 	}
 	
 	
 	public static void main(String [] args){
-		// Schedule a job for the event-dispatching thread:
-				// creating and showing this application's GUI.
 				javax.swing.SwingUtilities.invokeLater(new Runnable() {
 					public void run() {
 						createandshowgui();
-						
 					}
 				});
 	}
