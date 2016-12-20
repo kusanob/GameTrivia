@@ -75,7 +75,7 @@ public class GameModel extends Observable{
 	}
 	
 	//next step. Implement littel qol things
-	public boolean finish(String ans){
+	public boolean isFinished(String ans){
 		if(questionNum==4){
 			if(this.answerQuestion(ans)){
 				return true;
