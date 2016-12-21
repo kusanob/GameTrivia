@@ -1,11 +1,10 @@
-import java.util.Observable;
 
-public class GameModel extends Observable{
+public class CanadaStrategy extends TriviaStrategy{
 	private String question;
 	private String answer;
 	private int questionNum;
 	
-	public GameModel(){
+	public CanadaStrategy(){
 		this.question1();
 	}
 	

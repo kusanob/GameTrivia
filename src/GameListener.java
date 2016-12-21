@@ -7,11 +7,11 @@ import javax.swing.JTextField;
 
 public class GameListener implements ActionListener{
 
-	private GameModel gm;
+	private TriviaStrategy gm;
 	private JTextField ot;
 	private JFrame jf;
 	
-	public GameListener(GameModel ourGame, JTextField ourText, JFrame oj){
+	public GameListener(TriviaStrategy ourGame, JTextField ourText, JFrame oj){
 		gm = ourGame;
 		ot = ourText;
 		jf = oj;

@@ -6,18 +6,20 @@ import javax.swing.*;
 
 
 public class GameView extends JLabel implements Observer{
-	private GameModel gm;
-		
-	public GameView(GameModel ourGame){
-		gm = ourGame;
-		this.setText(gm.getQuestion());
+	private TriviaStrategy ts;
+	
+	public GameView(){}
+	
+	public GameView(TriviaStrategy ots){
+		ts=ots;
+		this.setText(ts.getQuestion());
 	}
 	
-	public static JPanel createGamePanel(JFrame jf){
-		GameModel gm = new GameModel();
+	public JPanel createGamePanel(JFrame jf, TriviaStrategy ots){
+		ts=ots;
 		
-		GameView gv = new GameView(gm);
-		gm.addObserver(gv);
+		GameView gv = new GameView(ts);
+		ts.addObserver(gv);
 		
 		JPanel jp = new JPanel();
 		jp.setLayout(new GridLayout(0,1));
@@ -26,7 +28,7 @@ public class GameView extends JLabel implements Observer{
 		
 		JTextField jt = new JTextField(10);
 		
-		GameListener gl = new GameListener(gm, jt, jf);
+		GameListener gl = new GameListener(ts, jt, jf);
 		jb.addActionListener(gl);
 		jf.getRootPane().setDefaultButton(jb);
 		jp.add(gv); 
@@ -54,12 +56,16 @@ public class GameView extends JLabel implements Observer{
 		JPanel startMenu = new JPanel();
 		startMenu.setLayout(new GridLayout(2, 1));
 		
-		JButton startButton = new JButton("Start");
+		GameView gv = new GameView();
+		JButton america = new JButton("America");
+		JButton canada = new JButton("Canada");
 		
-		GameStartListener gsl = new GameStartListener(jf);
+		GameStartListener gsl = new GameStartListener(jf, gv);
 		
-		startMenu.add(startButton);
-		startButton.addActionListener(gsl);
+		startMenu.add(america);
+		america.addActionListener(gsl);
+		startMenu.add(canada);
+		canada.addActionListener(gsl);
 		
 		jf.add(startMenu);
 		jf.setVisible(true);
@@ -77,7 +83,7 @@ public class GameView extends JLabel implements Observer{
 	
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		GameModel gm = (GameModel)arg0;
+		TriviaStrategy gm = (TriviaStrategy)arg0;
 		this.setText(gm.getQuestion());		
 	}
 
