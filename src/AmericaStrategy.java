@@ -1,96 +1,50 @@
+import java.util.ArrayList;
 
-public class AmericaStrategy extends TriviaStrategy{
-	private String question;
-	private String answer;
+public class AmericaStrategy extends TriviaStrategy {
+	private ArrayList<Tuple> Trivia;
 	private int questionNum;
 	
-	public AmericaStrategy(){
-		this.question1();
-	}
 	
-	public void question1(){
-		question = "What is the captial of America?";
-		answer = "washington";
-		questionNum = 1;
+	public AmericaStrategy(){
+		questionNum = 0;
+		Trivia = new ArrayList<Tuple>();
+		Trivia.add(new Tuple("What is the capital of America?", "washington"));
+		Trivia.add(new Tuple("What state has the largest population in America?", "california"));
+		Trivia.add(new Tuple("How many states are in America?", "50"));
+		Trivia.add(new Tuple("Where is the tech capital of America?", "silicon valley"));
 		
 	}
 	
-	public void question2(){
-		question = "What state has the largest population in America?";
-		answer = "california";
-		questionNum = 2;
-	}
-	
-	
-	public void question3(){
-		question = "How many states are there in America?";
-		answer = "50";
-		questionNum = 3;
-	}
-	
-	public void question4(){
-		question = "What is the tech capital in America?";
-		answer = "silicon valley";
-		questionNum = 4;
-	}
-	
-	public boolean answerQuestion(String ans){
-		ans = ans.toLowerCase();
-		if(ans.equals(answer)){
-			return true;
-		}else{
-			return false;
-		}
-	}
 	
 	public void setNextQuestion(){
-		if(questionNum==1){
-			this.question2();
-			this.setChanged();
-			this.notifyObservers();
-			return;
-		}
-			
-		if(questionNum==2){
-			this.question3();
-			this.setChanged();
-			this.notifyObservers();
-			return;
-		}
-		
-		if(questionNum==3){
-			this.question4();
-			this.setChanged();
-			this.notifyObservers();
-			return;
-		}
-		
-		if(questionNum==4){
-			this.question1();	
-			this.setChanged();
-			this.notifyObservers();
-			return;
-		}
+		questionNum++;
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
-	//next step. Implement littel qol things
-	public boolean isFinished(String ans){
-		if(questionNum==4){
-			if(this.answerQuestion(ans)){
-				return true;
-			}else{
-				return false;
-			}
+	
+	public boolean isFinished(){
+		if(questionNum==Trivia.size()-1){
+			return true;
 		}
 		return false;
 	}
+	
+	
+	public boolean answerQuestion(String n){
+		if(Trivia.get(questionNum).getAnswer().equals(n)){
+			return true;
+		}
+		return false;
+	}
+	
+	
 	public String getQuestion(){
-		return question;
+		return Trivia.get(questionNum).getQuestion();
 	}
 	
-	public int getQuestionNum(){
+	
+	public int getNum(){
 		return questionNum;
-	}
-	
-	
+	}	
 }

@@ -15,6 +15,7 @@ public class GameView extends JLabel implements Observer{
 		this.setText(ts.getQuestion());
 	}
 	
+	
 	public JPanel createGamePanel(JFrame jf, TriviaStrategy ots){
 		ts=ots;
 		

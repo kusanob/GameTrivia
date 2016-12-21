@@ -21,7 +21,7 @@ public class GameListener implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if(gm.answerQuestion(ot.getText())){
-			if(gm.isFinished(ot.getText())){
+			if(gm.isFinished()){
 				JPanel a = GameView.createWinPanel();
 				jf.setContentPane(a);
 				jf.revalidate();

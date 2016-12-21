@@ -1,96 +1,55 @@
+import java.util.ArrayList;
 
-public class CanadaStrategy extends TriviaStrategy{
-	private String question;
-	private String answer;
+public class CanadaStrategy extends TriviaStrategy {
+	private ArrayList<Tuple> Trivia;
 	private int questionNum;
 	
+	
 	public CanadaStrategy(){
-		this.question1();
+		questionNum = 0;
+		Trivia = new ArrayList<Tuple>();
+		Trivia.add(new Tuple("What is the capital of Canada?", "ottawa"));
+		Trivia.add(new Tuple("What city has the largest population in Canada?", "toronto"));
+		Trivia.add(new Tuple("How many provinces are in Canada?", "10"));
+		Trivia.add(new Tuple("How many terrotories are there?", "3"));
+		Trivia.add(new Tuple("What day is Canadas birthday?", "july 1"));
+		Trivia.add(new Tuple("What is the population of Canada", "36million"));
+		Trivia.add(new Tuple("How many official languages does Canada have?", "2"));
+		Trivia.add(new Tuple("What are the two languages?", "english french"));
+		Trivia.add(new Tuple("What is the smallest province?", "prince edward island"));
+		Trivia.add(new Tuple("Did you enjoy the game?", "yes"));
 	}
 	
-	public void question1(){
-		question = "What is the captial of Canada?";
-		answer = "ottawa";
-		questionNum = 1;
-		
-	}
-	
-	public void question2(){
-		question = "What city has the largest population in Canada?";
-		answer = "toronto";
-		questionNum = 2;
-	}
-	
-	
-	public void question3(){
-		question = "How provinces are there in Canada?";
-		answer = "10";
-		questionNum = 3;
-	}
-	
-	public void question4(){
-		question = "How many terrotories are there in Canada?";
-		answer = "3";
-		questionNum = 4;
-	}
-	
-	public boolean answerQuestion(String ans){
-		ans = ans.toLowerCase();
-		if(ans.equals(answer)){
-			return true;
-		}else{
-			return false;
-		}
-	}
 	
 	public void setNextQuestion(){
-		if(questionNum==1){
-			this.question2();
-			this.setChanged();
-			this.notifyObservers();
-			return;
-		}
-			
-		if(questionNum==2){
-			this.question3();
-			this.setChanged();
-			this.notifyObservers();
-			return;
-		}
-		
-		if(questionNum==3){
-			this.question4();
-			this.setChanged();
-			this.notifyObservers();
-			return;
-		}
-		
-		if(questionNum==4){
-			this.question1();	
-			this.setChanged();
-			this.notifyObservers();
-			return;
-		}
+		questionNum++;
+		this.setChanged();
+		this.notifyObservers();
 	}
 	
-	//next step. Implement littel qol things
-	public boolean isFinished(String ans){
-		if(questionNum==4){
-			if(this.answerQuestion(ans)){
-				return true;
-			}else{
-				return false;
-			}
+	
+	public boolean isFinished(){
+		if(questionNum==Trivia.size()-1){
+			return true;
 		}
 		return false;
 	}
+	
+	
+	public boolean answerQuestion(String n){
+		if(Trivia.get(questionNum).getAnswer().equals(n)){
+			return true;
+		}
+		return false;
+	}
+	
+	
 	public String getQuestion(){
-		return question;
+		return Trivia.get(questionNum).getQuestion();
 	}
 	
-	public int getQuestionNum(){
+	
+	public int getNum(){
 		return questionNum;
-	}
-	
-	
+	}	
 }
